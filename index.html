@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Farmers Market Connect</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f8f3;
+            color: #333;
+        }
+
+        /* NAVBAR */
+        nav {
+            background: #176b3a;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav h1 {
+            font-size: 25px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            color: #c8f7d5;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 480px;
+            background: linear-gradient(rgba(0,80,40,0.75), rgba(0,80,40,0.75)),
+                        url("https://images.unsplash.com/photo-1500937386664-56d1dfef3854")
+                        center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 30px;
+        }
+
+        .hero h2 {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 25px;
+            background: #ffb703;
+            color: #222;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #ffd166;
+        }
+
+        /* SECTION */
+        section {
+            padding: 60px 7%;
+        }
+
+        .title {
+            text-align: center;
+            color: #176b3a;
+            font-size: 32px;
+            margin-bottom: 35px;
+        }
+
+        /* ABOUT */
+        .about {
+            text-align: center;
+            max-width: 900px;
+            margin: auto;
+            line-height: 1.8;
+            font-size: 17px;
+        }
+
+        /* SEARCH */
+        .search-box {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .search-box input {
+            width: 70%;
+            max-width: 600px;
+            padding: 14px;
+            border: 1px solid #bbb;
+            border-radius: 7px;
+            font-size: 16px;
+        }
+
+        /* PRODUCTS */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card h3 {
+            color: #176b3a;
+            margin-bottom: 8px;
+        }
+
+        .price {
+            color: #e67e22;
+            font-weight: bold;
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        /* FEATURES */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .feature {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .feature .icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            color: #176b3a;
+            margin-bottom: 10px;
+        }
+
+        /* FARMERS */
+        .farmers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .farmer {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .farmer h3 {
+            color: #176b3a;
+            margin-bottom: 10px;
+        }
+
+        /* CONTACT */
+        .contact {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .contact input,
+        .contact textarea {
+            width: 100%;
+            padding: 13px;
+            margin-bottom: 15px;
+            border: 1px solid #bbb;
+            border-radius: 6px;
+        }
+
+        .contact textarea {
+            height: 120px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #124d2d;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        @media(max-width: 700px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 12px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h2 {
+                font-size: 34px;
+            }
+
+            .search-box input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <h1> Farmers Market Connect</h1>
+
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#farmers">Farmers</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+
+<!-- HOME -->
+<section class="hero" id="home">
+
+    <div>
+        <h2>Farm to Your Table </h2>
+
+        <p>
+            Connecting Local Farmers Directly With Consumers
+        </p>
+
+        <a href="#products" class="btn">
+            Explore Products
+        </a>
+    </div>
+
+</section>
+
+
+<!-- ABOUT -->
+<section id="about">
+
+    <h2 class="title">About Farmers Market Connect</h2>
+
+    <div class="about">
+
+        <p>
+            Farmers Market Connect is a community-based digital platform
+            designed to connect local farmers with customers.
+            Farmers can promote their fresh agricultural products
+            and customers can easily discover locally available products.
+        </p>
+
+        <br>
+
+        <p>
+            Our goal is to support local farmers, reduce unnecessary
+            middlemen and promote fresh, local and sustainable food.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURES -->
+<section>
+
+    <h2 class="title">Our Features</h2>
+
+    <div class="features">
+
+        <div class="feature">
+            <div class="icon"></div>
+            <h3>Farmer Promotion</h3>
+            <p>
+                Farmers can promote their products and reach more customers.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="icon"></div>
+            <h3>Fresh Products</h3>
+            <p>
+                Discover fresh vegetables, fruits and other local products.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="icon"></div>
+            <h3>Easy Search</h3>
+            <p>
+                Search products easily according to your requirement.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="icon"></div>
+            <h3>Direct Connection</h3>
+            <p>
+                Connect customers directly with local farmers.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+<section id="products">
+
+    <h2 class="title">Local Products</h2>
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="search"
+            placeholder=" Search vegetables, fruits..."
+            onkeyup="searchProducts()"
+        >
+
+    </div>
+
+
+    <div class="products" id="productList">
+
+
+        <!-- PRODUCT 1 -->
+        <div class="card">
+
+            <img src="https://images.unsplash.com/photo-1597362925123-77861d3fbac7">
+
+            <div class="card-content">
+
+                <h3>Fresh Tomatoes </h3>
+
+                <p>Farmer: Ramesh Patil</p>
+
+                <p>Location: Kolhapur</p>
+
+                <p class="price">₹30 / kg</p>
+
+                <button class="btn" onclick="orderProduct('Fresh Tomatoes')">
+                    Contact Farmer
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 2 -->
+        <div class="card">
+
+            <img src="https://images.unsplash.com/photo-1587486913049-53fc88980cfc">
+
+            <div class="card-content">
+
+                <h3>Fresh Eggs </h3>
+
+                <p>Farmer: Sunil More</p>
+
+                <p>Location: Sangli</p>
+
+                <p class="price">₹7 / piece</p>
+
+                <button class="btn" onclick="orderProduct('Fresh Eggs')">
+                    Contact Farmer
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 3 -->
+        <div class="card">
+
+            <img src="https://images.unsplash.com/photo-1622205313162-be1d5712a43e">
+
+            <div class="card-content">
+
+                <h3>Fresh Mangoes </h3>
+
+                <p>Farmer: Mahesh Jadhav</p>
+
+                <p>Location: Ratnagiri</p>
+
+                <p class="price">₹100 / kg</p>
+
+                <button class="btn" onclick="orderProduct('Fresh Mangoes')">
+                    Contact Farmer
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 4 -->
+        <div class="card">
+
+            <img src="https://images.unsplash.com/photo-1576045057995-568f588f82fb">
+
+            <div class="card-content">
+
+                <h3>Green Vegetables </h3>
+
+                <p>Farmer: Suresh Pawar</p>
+
+                <p>Location: Karad</p>
+
+                <p class="price">₹40 / bundle</p>
+
+                <button class="btn" onclick="orderProduct('Green Vegetables')">
+                    Contact Farmer
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FARMERS -->
+<section id="farmers">
+
+    <h2 class="title">Our Local Farmers</h2>
+
+    <div class="farmers">
+
+        <div class="farmer">
+            <h3> Ramesh Patil</h3>
+            <p> Kolhapur</p>
+            <p>Products: Vegetables</p>
+        </div>
+
+        <div class="farmer">
+            <h3> Sunil More</h3>
+            <p> Sangli</p>
+            <p>Products: Eggs & Dairy</p>
+        </div>
+
+        <div class="farmer">
+            <h3> Mahesh Jadhav</h3>
+            <p> Ratnagiri</p>
+            <p>Products: Fruits</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CONTACT -->
+<section id="contact">
+
+    <h2 class="title">Contact Us</h2>
+
+    <div class="contact">
+
+        <input type="text" id="name" placeholder="Your Name">
+
+        <input type="email" id="email" placeholder="Your Email">
+
+        <textarea id="message"
+            placeholder="Write your message..."></textarea>
+
+        <button class="btn" onclick="sendMessage()">
+            Send Message
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <p>
+        © 2026 Farmers Market Connect
+    </p>
+
+    <p>
+        Supporting Local Farmers | Fresh Food | Strong Community 
+    </p>
+
+</footer>
+
+
+<!-- JAVASCRIPT -->
+<script>
+
+    // PRODUCT SEARCH
+
+    function searchProducts() {
+
+        let input =
+            document.getElementById("search")
+            .value
+            .toLowerCase();
+
+        let cards =
+            document.querySelectorAll(".card");
+
+        cards.forEach(function(card) {
+
+            let text =
+                card.innerText.toLowerCase();
+
+            if(text.includes(input)) {
+
+                card.style.display = "block";
+
+            } else {
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+    }
+
+
+    // CONTACT FARMER
+
+    function orderProduct(product) {
+
+        alert(
+            "You selected: " +
+            product +
+            "\n\nFarmer contact feature can be connected with database/cloud in the next stage."
+        );
+
+    }
+
+
+    // CONTACT FORM
+
+    function sendMessage() {
+
+        let name =
+            document.getElementById("name").value;
+
+        let email =
+            document.getElementById("email").value;
+
+        let message =
+            document.getElementById("message").value;
+
+
+        if(name === "" || email === "" || message === "") {
+
+            alert("Please fill all fields.");
+
+        }
+
+        else {
+
+            alert(
+                "Thank you " +
+                name +
+                "! Your message has been submitted."
+            );
+
+        }
+
+    }
+
+</script>
+
+</body>
+</html
